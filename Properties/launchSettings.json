@@ -1,9 +1,8 @@
 {
   "profiles": {
-    "CodingTracker1": {
+    "DegreeTracker": {
       "commandName": "Project",
-      "workingDirectory": "C:\\Users\\jting\\Documents\\Code\\CodingTracker1",
-      "nativeDebugging": false
+      "workingDirectory": "C:\\Users\\jting\\Documents\\Code\\DegreeTracker"
     }
   }
 }

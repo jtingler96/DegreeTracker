@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QqNRpfwySwhfd8m36wu52cpiNUuSyZWVTkepwQdZEc8sWTKWQBBOXxE9ZLUQCnAcAmFOcgOFhXJTEYz4UhcmRA==",
+  "dgSpecHash": "a8wXBJlnpEJQDNGQjXo4xm7tXufrfsBFm967uYbiLk+kykc3B+JqnUn5RB0F/vra9jiNDA5cwAs3fm9fuTpxpA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\jting\\Documents\\Code\\CodingTracker1\\DegreeTracker.csproj",
+  "projectFilePath": "C:\\Users\\jting\\Documents\\Code\\DegreeTracker\\DegreeTracker.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\jting\\.nuget\\packages\\consoletableext\\3.1.9\\consoletableext.3.1.9.nupkg.sha512",
     "C:\\Users\\jting\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
