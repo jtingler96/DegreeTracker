@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "CodingTracker1": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\jting\\Documents\\Code\\CodingTracker1",
+      "nativeDebugging": false
+    }
+  }
+}
