@@ -20,7 +20,7 @@ namespace DegreeTracker
             if (!dbPath)
             {
                 Console.WriteLine("\n\nDatabase doesn't exist, creating one...\n\n");
-                SqliteHelper.InitialiseDB();
+                SqliteHelper.InitializeDB();
             }
             //If a database exists continue to the controller
             else
