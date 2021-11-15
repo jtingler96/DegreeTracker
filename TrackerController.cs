@@ -47,22 +47,38 @@ namespace DegreeTracker
                     break;
                 case 1:
                     //ViewRecords();
-                    Console.WriteLine("\n************   View function not yet available   ***********");
+                    using (var connection = new SqliteConnection(connectionString))
+                    {
+                        connection.Open();
+                        var dBCommand = connection.CreateCommand();
+                        dBCommand.CommandText = "SELECT * FROM classes";
+
+                        List<UpdateClass> tableData = new List<UpdateClass>();
+
+                        connection.Close();
+                    }
+
                     GetUserCommand();
                     break;
                 case 2:
+                    //Insert new record into the classes table
+
                     Console.WriteLine("\nEnter the class name\n");
                     string className = Console.ReadLine();
+
                     Console.WriteLine("\nEnter the amount of credits earned\n");
                     int creditsEarned = int.Parse(Console.ReadLine());
+
                     Console.WriteLine("\nEnter the class gpa\n");
                     int classGpa = Int32.Parse(Console.ReadLine());
+
+                    //open connection to the database
                     using (var connection = new SqliteConnection(connectionString))
                     {
                         connection.Open();
                         //use the connection here
                         var dBCommand = connection.CreateCommand();
-                        dBCommand.CommandText = "insert into classes (name, credits, gpa) values ('" + className + "','" + creditsEarned + "','" + classGpa + "');";
+                        dBCommand.CommandText = $"insert into classes (name, credits, gpa) values ('{className}','{ creditsEarned}','{classGpa}')";
                         dBCommand.ExecuteNonQuery();
                         connection.Close();
                     }
