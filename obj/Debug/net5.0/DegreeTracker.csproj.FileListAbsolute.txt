@@ -70,7 +70,6 @@ C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\DegreeTracker.runti
 C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\DegreeTracker.dll
 C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\ref\DegreeTracker.dll
 C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\DegreeTracker.pdb
-C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\ConsoleTableExt.dll
 C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\Humanizer.dll
 C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\Microsoft.Data.Sqlite.dll
 C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
@@ -128,3 +127,4 @@ C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\ref\DegreeTracker.d
 C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\DegreeTracker.pdb
 C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\DegreeTracker.genruntimeconfig.cache
 C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\DegreeTracker.csproj.CopyComplete
+C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\ConsoleTables.dll

@@ -1,4 +1,5 @@
-﻿using ConsoleTableExt;
+﻿
+using ConsoleTables;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace DegreeTracker
                         dBCommand.CommandText = "SELECT * FROM classes";
 
                         List<UpdateClass> tableData = new List<UpdateClass>();
+                        ConsoleTable.From<UpdateClass>(tableData).Write();
 
                         connection.Close();
                     }
@@ -64,13 +66,13 @@ namespace DegreeTracker
                     //Insert new record into the classes table
 
                     Console.WriteLine("\nEnter the class name\n");
-                    string className = Console.ReadLine();
+                    string name = Console.ReadLine();
 
                     Console.WriteLine("\nEnter the amount of credits earned\n");
-                    int creditsEarned = int.Parse(Console.ReadLine());
+                    int credits = int.Parse(Console.ReadLine());
 
                     Console.WriteLine("\nEnter the class gpa\n");
-                    int classGpa = Int32.Parse(Console.ReadLine());
+                    int gpa = Int32.Parse(Console.ReadLine());
 
                     //open connection to the database
                     using (var connection = new SqliteConnection(connectionString))
@@ -78,7 +80,7 @@ namespace DegreeTracker
                         connection.Open();
                         //use the connection here
                         var dBCommand = connection.CreateCommand();
-                        dBCommand.CommandText = $"insert into classes (name, credits, gpa) values ('{className}','{ creditsEarned}','{classGpa}')";
+                        dBCommand.CommandText = $"insert into classes (name, credits, gpa) values ('{name}','{ credits}','{gpa}')";
                         dBCommand.ExecuteNonQuery();
                         connection.Close();
                     }
