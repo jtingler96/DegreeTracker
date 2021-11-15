@@ -48,26 +48,29 @@ namespace DegreeTracker
                 case 1:
                     //ViewRecords();
                     viewProgress();
-
+                    //Return to main menu
                     GetUserCommand();
                     break;
                 case 2:
                     addClass();
-
+                    //Return to main menu
                     GetUserCommand();
                     break;
                 case 3:
-                    //Edit();
+                    //Placeholder
                     Console.WriteLine("\n************   Edit function not yet available   ***********");
+                    //Return to main menu
                     GetUserCommand();
                     break;
                 case 4:
-                    //Delete();
+                    //Placeholder
                     Console.WriteLine("\n************   Delete function not yet available   ***********");
+                    //Return to main menu
                     GetUserCommand();
                     break;
                 default:
                     Console.WriteLine("\n************   Please select an option from the menu   ************\n");
+                    //Return to main menu
                     GetUserCommand();
                     break;
             }
