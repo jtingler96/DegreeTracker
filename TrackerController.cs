@@ -52,17 +52,17 @@ namespace DegreeTracker
                     break;
                 case 2:
                     Console.WriteLine("\nEnter the class name\n");
-                    string name = Console.ReadLine();
+                    string className = Console.ReadLine();
                     Console.WriteLine("\nEnter the amount of credits earned\n");
-                    int credits = int.Parse(Console.ReadLine());
+                    int creditsEarned = int.Parse(Console.ReadLine());
                     Console.WriteLine("\nEnter the class gpa\n");
-                    int gpa = Int32.Parse(Console.ReadLine());
+                    int classGpa = Int32.Parse(Console.ReadLine());
                     using (var connection = new SqliteConnection(connectionString))
                     {
                         connection.Open();
                         //use the connection here
                         var dBCommand = connection.CreateCommand();
-                        dBCommand.CommandText = $"INSERT INTO classes (name, credits, gpa) VALUES ({name}, {credits}, {gpa})";
+                        dBCommand.CommandText = "insert into classes (name, credits, gpa) values ('" + className + "','" + creditsEarned + "','" + classGpa + "');";
                         dBCommand.ExecuteNonQuery();
                         connection.Close();
                     }
