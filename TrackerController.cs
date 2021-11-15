@@ -1,5 +1,4 @@
-﻿
-using ConsoleTables;
+﻿using ConsoleTableExt;
 using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
@@ -48,44 +47,13 @@ namespace DegreeTracker
                     break;
                 case 1:
                     //ViewRecords();
-                    using (var connection = new SqliteConnection(connectionString))
-                    {
-                        connection.Open();
-                        var dBCommand = connection.CreateCommand();
-                        dBCommand.CommandText = "SELECT * FROM classes";
-
-                        List<UpdateClass> tableData = new List<UpdateClass>();
-                        ConsoleTable.From<UpdateClass>(tableData).Write();
-
-                        connection.Close();
-                    }
+                    viewProgress();
 
                     GetUserCommand();
                     break;
                 case 2:
-                    //Insert new record into the classes table
+                    addClass();
 
-                    Console.WriteLine("\nEnter the class name\n");
-                    string name = Console.ReadLine();
-
-                    Console.WriteLine("\nEnter the amount of credits earned\n");
-                    int credits = int.Parse(Console.ReadLine());
-
-                    Console.WriteLine("\nEnter the class gpa\n");
-                    int gpa = Int32.Parse(Console.ReadLine());
-
-                    //open connection to the database
-                    using (var connection = new SqliteConnection(connectionString))
-                    {
-                        connection.Open();
-                        //use the connection here
-                        var dBCommand = connection.CreateCommand();
-                        dBCommand.CommandText = $"insert into classes (name, credits, gpa) values ('{name}','{ credits}','{gpa}')";
-                        dBCommand.ExecuteNonQuery();
-                        connection.Close();
-                    }
-
-                    Console.WriteLine("\nYour class was submitted!\n");
                     GetUserCommand();
                     break;
                 case 3:
@@ -103,6 +71,73 @@ namespace DegreeTracker
                     GetUserCommand();
                     break;
             }
+        }
+
+        internal static void viewProgress()
+        {
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                SqliteCommand dBCommand = new SqliteCommand(
+                 "SELECT id, name, credits, gpa FROM Classes;",
+                 connection);
+                connection.Open();
+
+                List<UpdateClass> tableData = new List<UpdateClass>();
+                SqliteDataReader reader = dBCommand.ExecuteReader();
+
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        tableData.Add(
+                        new UpdateClass
+                        {
+                            Id = reader.GetInt32(0),
+                            Name = reader.GetString(1),
+                            Credits = reader.GetInt32(2),
+                            GPA = reader.GetInt32(3)
+                        });
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No rows found");
+                }
+                reader.Close();
+                Console.WriteLine("\n\n");
+
+                ConsoleTableBuilder
+                    .From(tableData)
+                    .ExportAndWriteLine();
+                Console.WriteLine("\n\n");
+            }
+        }
+
+        internal static void addClass()
+        {
+            //Insert new record into the classes table
+
+            Console.WriteLine("\nEnter the class name\n");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("\nEnter the amount of credits earned\n");
+            int credits = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("\nEnter the class gpa\n");
+            int gpa = Int32.Parse(Console.ReadLine());
+
+            //open connection to the database
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                //use the connection here
+                var dBCommand = connection.CreateCommand();
+                dBCommand.CommandText = $"insert into classes (name, credits, gpa) values ('{name}','{ credits}','{gpa}')";
+                dBCommand.ExecuteNonQuery();
+                connection.Close();
+            }
+
+            Console.WriteLine("\nYour class was submitted!\n");
         }
     }
 }

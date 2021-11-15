@@ -127,4 +127,4 @@ C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\ref\DegreeTracker.d
 C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\DegreeTracker.pdb
 C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\DegreeTracker.genruntimeconfig.cache
 C:\Users\jting\Documents\Code\DegreeTracker\obj\Debug\net5.0\DegreeTracker.csproj.CopyComplete
-C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\ConsoleTables.dll
+C:\Users\jting\Documents\Code\DegreeTracker\bin\Debug\net5.0\ConsoleTableExt.dll
