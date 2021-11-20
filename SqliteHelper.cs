@@ -23,7 +23,7 @@ namespace DegreeTracker
 
             //Create a table
             tableCmd.CommandText =
-                $"create table classes (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING, credits INTEGER, gpa INTEGER ) ";
+                $"create table classes (id INTEGER PRIMARY KEY AUTOINCREMENT, name STRING, credits INTEGER, gpa FLOAT ) ";
 
             //Execute the CommandText against the database
             tableCmd.ExecuteNonQuery();

@@ -10,6 +10,6 @@ namespace DegreeTracker
         public int Id { get; set; }
         public string Name { get; set; }
         public int Credits { get; set; }
-        public int GPA { get; set; }
+        public float GPA { get; set; }
     }
 }

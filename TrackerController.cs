@@ -24,7 +24,7 @@ namespace DegreeTracker
             Console.WriteLine("\nType 1 to view your degree progress");
             Console.WriteLine("\nType 2 to add a completed class");
             Console.WriteLine("\nType 3 to edit a class");
-            Console.WriteLine("\nType 4 to delete a class");
+            Console.WriteLine("\nType 4 to remove a class");
 
             //assign user input to a string
             string userInput = Console.ReadLine();
@@ -63,8 +63,7 @@ namespace DegreeTracker
                     GetUserCommand();
                     break;
                 case 4:
-                    //Placeholder
-                    Console.WriteLine("\n************   Delete function not yet available   ***********");
+                    removeClass();
                     //Return to main menu
                     GetUserCommand();
                     break;
@@ -98,7 +97,7 @@ namespace DegreeTracker
                             Id = reader.GetInt32(0),
                             Name = reader.GetString(1),
                             Credits = reader.GetInt32(2),
-                            GPA = reader.GetInt32(3)
+                            GPA = reader.GetFloat(3)
                         });
                     }
                 }
@@ -124,11 +123,15 @@ namespace DegreeTracker
             string name = Console.ReadLine();
 
             Console.WriteLine("\nEnter the amount of credits earned\n");
-            int credits = int.Parse(Console.ReadLine());
+            string creditsInput = Console.ReadLine();
+            int credits;
+            int.TryParse(creditsInput, out credits);
 
             Console.WriteLine("\nEnter the class gpa\n");
-            int gpa = Int32.Parse(Console.ReadLine());
-
+            string gpaInput = Console.ReadLine();
+            float gpa;
+            float.TryParse(gpaInput, out gpa);
+            
             //open connection to the database
             using (var connection = new SqliteConnection(connectionString))
             {
@@ -142,5 +145,39 @@ namespace DegreeTracker
 
             Console.WriteLine("\nYour class was submitted!\n");
         }
+
+        internal static void removeClass()
+        {
+            Console.WriteLine("\n\nType the Id of the class you want to remove. Type 0 to return to main menu.\n\n");
+            string consoleInput = Console.ReadLine();
+            if (string.IsNullOrEmpty(consoleInput))
+            {
+                Console.WriteLine("\nYou have to type an Id.\n");
+                GetUserCommand();
+            }
+            int Id = Int32.Parse(consoleInput);
+
+            if (Id == 0) GetUserCommand();
+
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var tableCmd = connection.CreateCommand();
+                tableCmd.CommandText = $"DELETE from classes WHERE Id = '{Id}'";
+                int rowCount = tableCmd.ExecuteNonQuery();
+                Console.WriteLine("\n\n\nclass was removed\n\n");
+                while (rowCount == 0)
+                {
+                    Console.WriteLine($"\n\nClass with Id {Id} doesn't exist. Try Again or type 0 to return to main menu. \n\n");
+                    Id = Int32.Parse(Console.ReadLine());
+
+                    if (Id == 0) GetUserCommand();
+
+                    if (rowCount != 0) break;
+                }
+            }
+        }
+
+        
     }
 }
