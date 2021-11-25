@@ -27,14 +27,7 @@ namespace DegreeTracker
             Console.WriteLine("\nType 4 to remove a class");
 
             //assign user input to a string
-            string userInput = Console.ReadLine();
-
-            //If user presses enter without typing a number, returns statement informing user to choose an option
-            if (string.IsNullOrEmpty(userInput))
-            {
-                Console.WriteLine("\n************   Please select an option from the menu   ************\n");
-                GetUserCommand();
-            }
+            string userInput = inputInt();
 
             //convert user string input to an integer
             int command = Convert.ToInt32(userInput);
@@ -178,6 +171,18 @@ namespace DegreeTracker
             }
         }
 
-        
+        internal static string inputInt()
+        {
+            string userInput = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(userInput) || !int.TryParse(userInput, out _))
+            {
+                Console.WriteLine("\nInvalid Command. Please type a numeric value");
+                userInput = Console.ReadLine();
+            }
+
+            return userInput;
+
+        }
     }
 }
