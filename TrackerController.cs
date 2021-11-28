@@ -51,7 +51,7 @@ namespace DegreeTracker
                     break;
                 case 3:
                     //Placeholder
-                    Console.WriteLine("\n************   Edit function not yet available   ***********");
+                    editClass();
                     //Return to main menu
                     GetUserCommand();
                     break;
@@ -132,7 +132,7 @@ namespace DegreeTracker
                 connection.Close();
             }
 
-            Console.WriteLine("\nYour class was submitted!\n");
+            Console.WriteLine($"\n\nYour class was submitted: {name} | {credits} credits | {gpa} gpa.\n\n");
         }
 
         internal static void removeClass()
@@ -164,6 +164,48 @@ namespace DegreeTracker
 
                     if (rowCount != 0) break;
                 }
+            }
+        }
+
+        internal static void editClass()
+        {
+            Console.WriteLine("\n\nType Id of the class would like to edit. Type 0 to return to main manu.\n\n");
+
+            string userInput = inputInt();
+
+            int Id = Convert.ToInt32(userInput);
+
+            if (Id == 0) GetUserCommand();
+
+            using (var connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+
+                var checkCmd = connection.CreateCommand();
+                checkCmd.CommandText = $"SELECT EXISTS(SELECT 1 FROM classes WHERE Id = {Id})";
+                int checkQuery = Convert.ToInt32(checkCmd.ExecuteScalar());
+
+                if (checkQuery == 0)
+                {
+                    Console.WriteLine($"\n\nRecord with Id {Id} doesn't exist.\n\n");
+                    GetUserCommand();
+                }
+
+                Console.WriteLine("\nEnter the class name\n");
+                string name = Console.ReadLine();
+
+                Console.WriteLine("\nEnter the amount of credits earned\n");
+                string credits = inputInt();
+
+                Console.WriteLine("\nEnter the class gpa\n");
+                string gpa = inputFloat();
+
+                var tableCmd = connection.CreateCommand();
+                tableCmd.CommandText = $"UPDATE classes SET name = '{name}', credits = '{credits}', gpa = '{gpa}' WHERE Id = {Id}";
+                tableCmd.ExecuteNonQuery();
+
+                Console.WriteLine($"\n\nChanges to your class were successful: {name} | {credits} credits | {gpa} gpa.\n\n");
+                connection.Close();
             }
         }
 
