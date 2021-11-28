@@ -116,14 +116,10 @@ namespace DegreeTracker
             string name = Console.ReadLine();
 
             Console.WriteLine("\nEnter the amount of credits earned\n");
-            string creditsInput = Console.ReadLine();
-            int credits;
-            int.TryParse(creditsInput, out credits);
+            string credits = inputInt();
 
             Console.WriteLine("\nEnter the class gpa\n");
-            string gpaInput = Console.ReadLine();
-            float gpa;
-            float.TryParse(gpaInput, out gpa);
+            string gpa = inputFloat();
             
             //open connection to the database
             using (var connection = new SqliteConnection(connectionString))
@@ -177,12 +173,24 @@ namespace DegreeTracker
 
             while (string.IsNullOrEmpty(userInput) || !int.TryParse(userInput, out _))
             {
-                Console.WriteLine("\nInvalid Command. Please type a numeric value");
+                Console.WriteLine("\nInvalid input. Please type a numeric value");
                 userInput = Console.ReadLine();
             }
 
             return userInput;
 
+        }
+
+        internal static string inputFloat()
+        {
+            string userInput = Console.ReadLine();
+
+            while (string.IsNullOrEmpty(userInput) || !float.TryParse(userInput, out _))
+            {
+                Console.WriteLine("\nInvalid input. Please type a numeric value");
+                userInput = Console.ReadLine();
+            }
+            return userInput;
         }
     }
 }
