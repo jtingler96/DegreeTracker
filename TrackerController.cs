@@ -138,13 +138,8 @@ namespace DegreeTracker
         internal static void removeClass()
         {
             Console.WriteLine("\n\nType the Id of the class you want to remove. Type 0 to return to main menu.\n\n");
-            string consoleInput = Console.ReadLine();
-            if (string.IsNullOrEmpty(consoleInput))
-            {
-                Console.WriteLine("\nYou have to type an Id.\n");
-                GetUserCommand();
-            }
-            int Id = Int32.Parse(consoleInput);
+       
+            int Id = Int32.Parse(inputInt());
 
             if (Id == 0) GetUserCommand();
 
@@ -154,16 +149,16 @@ namespace DegreeTracker
                 var tableCmd = connection.CreateCommand();
                 tableCmd.CommandText = $"DELETE from classes WHERE Id = '{Id}'";
                 int rowCount = tableCmd.ExecuteNonQuery();
-                Console.WriteLine("\n\n\nclass was removed\n\n");
                 while (rowCount == 0)
                 {
                     Console.WriteLine($"\n\nClass with Id {Id} doesn't exist. Try Again or type 0 to return to main menu. \n\n");
-                    Id = Int32.Parse(Console.ReadLine());
+                    Id = Int32.Parse(inputInt());
 
                     if (Id == 0) GetUserCommand();
 
                     if (rowCount != 0) break;
                 }
+                Console.WriteLine("\n\n\nclass was removed\n\n");
             }
         }
 
@@ -188,7 +183,7 @@ namespace DegreeTracker
                 if (checkQuery == 0)
                 {
                     Console.WriteLine($"\n\nRecord with Id {Id} doesn't exist.\n\n");
-                    GetUserCommand();
+                    editClass();
                 }
 
                 Console.WriteLine("\nEnter the class name\n");
